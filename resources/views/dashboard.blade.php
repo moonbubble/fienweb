@@ -12,6 +12,11 @@
                     {{ __("You're logged in!") }}
                 </div>
             </div>
+
+            <a href="{{ url('/articles/create') }}" class="bg-white border-2 border-red-500">
+                                    Schrijf een artikel
+                                </a>
+
         </div>
     </div>
 </x-app-layout>
