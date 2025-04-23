@@ -13,8 +13,8 @@
                 </div>
             </div>
 
-            <a href="{{ url('/articles/create') }}" class="bg-white border-2 border-red-500">
-                                    Schrijf een artikel
+            <a href="{{ route('articles.create') }}" class="bg-white border-2 border-red-500">
+                                    {{__('Schrijf een artikel')}}
                                 </a>
 
         </div>

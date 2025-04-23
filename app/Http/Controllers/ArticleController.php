@@ -49,7 +49,8 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        return view('articles.show', compact('article'));
     }
 
     /**
@@ -57,15 +58,28 @@ class ArticleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        return view('articles.edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'string', 'max:127'],
+            'subtitle' => ['string', 'max:127', 'nullable'],
+            'content' => ['required', 'string']
+        ]);
+
+        $article->update([
+            'title' => $request->input('title'),
+            'subtitle' => $request->input('subtitle'),
+            'content' => $request->input('content'),
+        ]);
+
+        return redirect()->route('articles.show', $article)->with('status', 'Artikel bijgewerkt!');
     }
 
     /**
