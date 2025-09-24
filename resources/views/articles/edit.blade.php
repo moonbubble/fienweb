@@ -3,7 +3,10 @@
 
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    {{-- Even checken wat ik nou mee geef --}}
+
+    <span
+        class="{{ $article->draft ? 'bg-blue-500' : 'bg-green-500' }} text-white">{{ $article->draft ? 'Concept' : 'Gepubliceerd' }}</span>
+
     <form action="{{ route('articles.update', $article) }}" method="POST">
         @csrf
         @method('PUT')
@@ -24,8 +27,12 @@
             <x-input-error :messages="$errors->get('content')" />
         </div>
 
-        <x-primary-button>
-            {{ __('Update artikel') }}
+        <x-primary-button name="draft" value="1">
+            {{ __('Opslaan als concept') }}
+        </x-primary-button>
+
+        <x-primary-button name="draft" value="0">
+            {{ __('Publiceer artikel') }}
         </x-primary-button>
 
     </form>

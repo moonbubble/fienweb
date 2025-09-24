@@ -30,9 +30,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'string', 'max:127'],
-            'subtitle' => ['string', 'max:127', 'nullable'],
-            'content' => ['required', 'string'],
+            'title' => 'required|string|max:127',
+            'subtitle' => 'string|max:127|nullable',
+            'content' => 'required|string',
             'draft' => 'boolean'
         ]);
 
@@ -43,7 +43,7 @@ class ArticleController extends Controller
             'draft' => $request->draft
         ]);
 
-        return redirect(route('articles.index'));
+        return redirect(route('articles.index'))->with('status', $article->draft ? 'Concept aangemaakt!' : 'Artikel gepubliceerd!');
     }
 
     /**
@@ -70,18 +70,20 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         $request->validate([
-            'title' => ['required', 'string', 'max:127'],
-            'subtitle' => ['string', 'max:127', 'nullable'],
-            'content' => ['required', 'string']
+            'title' => 'required|string|max:127',
+            'subtitle' => 'string|max:127|nullable',
+            'content' => 'required|string',
+            'draft' => 'boolean'
         ]);
 
         $article->update([
             'title' => $request->input('title'),
             'subtitle' => $request->input('subtitle'),
             'content' => $request->input('content'),
+            'draft' => $request->input('draft')
         ]);
 
-        return redirect()->route('articles.show', $article)->with('status', 'Artikel bijgewerkt!');
+        return redirect()->route('articles.show', $article)->with('status', $article->draft ? 'Concept opgeslagen!' : 'Artikel gepubliceerd!');
     }
 
     /**
