@@ -32,13 +32,15 @@ class ArticleController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:127'],
             'subtitle' => ['string', 'max:127', 'nullable'],
-            'content' => ['required', 'string'] 
+            'content' => ['required', 'string'],
+            'draft' => 'boolean'
         ]);
 
         $article = Article::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
-            'content' => $request->content
+            'content' => $request->content,
+            'draft' => $request->draft
         ]);
 
         return redirect(route('articles.index'));

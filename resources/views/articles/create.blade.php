@@ -25,8 +25,12 @@
             <x-input-error :messages="$errors->get('content')" />
         </div>
 
-        <x-primary-button>
-            {{ __('Sla artikel op') }}
+        <x-primary-button name="draft" value="1">
+            {{ __('Opslaan als concept') }}
+        </x-primary-button>
+
+        <x-primary-button name="draft" value="0">
+            {{ __('Publiceer artikel') }}
         </x-primary-button>
 
     </form>

@@ -9,6 +9,17 @@ class Article extends Model
     protected $fillable = [
         'title',
         'subtitle',
-        'content'
+        'content',
+        'draft'
+    ];
+
+     /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'archived' => 0,
+        'draft' => true,
     ];
 }
