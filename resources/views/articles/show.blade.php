@@ -6,12 +6,19 @@
 
     <div class="mt-4">
         <span
-                class="{{ $article->draft ? 'bg-blue-500' : 'bg-green-500' }} text-white">{{ $article->draft ? 'Concept' : 'Gepubliceerd' }}</span>
+            class="{{ $article->draft ? 'bg-blue-500' : 'bg-green-500' }} text-white">{{ $article->draft ? 'Concept' : 'Gepubliceerd' }}</span>
         <h2>{{ __('Titel') }}: {{ $article->title }}</h2>
         @if ($article->subtitle)
             <p>{{ __('Subtitel') }}: {{ $article->subtitle }}</p>
         @endif
         <p>{{ __('Inhoud') }}: {{ $article->content }}</p>
         <a class="text-blue-500" href="{{ route('articles.edit', $article) }}">{{ __('Bewerk dit artikel') }}</a>
+
+        {{-- Archive button --}}
+        <form action="{{ route('articles.archive', $article) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <x-primary-button type="submit">Archiveer</x-primary-button>
+        </form>
     </div>
 </x-app-layout>

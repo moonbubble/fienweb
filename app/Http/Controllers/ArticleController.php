@@ -33,7 +33,8 @@ class ArticleController extends Controller
             'title' => 'required|string|max:127',
             'subtitle' => 'string|max:127|nullable',
             'content' => 'required|string',
-            'draft' => 'boolean'
+            'draft' => 'boolean',
+            'archived' => 'boolean'
         ]);
 
         $article = Article::create([
@@ -73,7 +74,8 @@ class ArticleController extends Controller
             'title' => 'required|string|max:127',
             'subtitle' => 'string|max:127|nullable',
             'content' => 'required|string',
-            'draft' => 'boolean'
+            'draft' => 'boolean',
+            'archived' => 'boolean'
         ]);
 
         $article->update([
@@ -84,6 +86,13 @@ class ArticleController extends Controller
         ]);
 
         return redirect()->route('articles.show', $article)->with('status', $article->draft ? 'Concept opgeslagen!' : 'Artikel gepubliceerd!');
+    }
+
+    public function archive(Article $article)
+    {
+        $article->update(['archived' => true]);
+
+        return redirect()->route('articles.index')->with('success', 'Artikel gearchiveerd');
     }
 
     /**

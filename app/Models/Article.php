@@ -10,7 +10,8 @@ class Article extends Model
         'title',
         'subtitle',
         'content',
-        'draft'
+        'draft',
+        'archived'
     ];
 
      /**
@@ -19,7 +20,7 @@ class Article extends Model
      * @var array
      */
     protected $attributes = [
-        'archived' => 0,
+        'archived' => false,
         'draft' => true,
     ];
 }

@@ -17,6 +17,13 @@
             <p>{{ __('Inhoud') }}: {{ $article->content }}</p>
             <a class="text-purple-500" href="{{ route('articles.show', $article) }}">{{ __('Bekijk dit artikel') }}</a>
             <a class="text-blue-500" href="{{ route('articles.edit', $article) }}">{{ __('Bewerk dit artikel') }}</a>
+            
+            {{-- Archive button --}}
+            <form action="{{ route('articles.archive', $article) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <x-primary-button type="submit">Archiveer</x-primary-button>
+            </form>
         </div>
     @endforeach
 </x-app-layout>
